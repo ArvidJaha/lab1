@@ -12,39 +12,8 @@ import javax.swing.*;
 
 public class DrawPanel extends JPanel{
 
-    // Just a single image, TODO: Generalize
-    HashMap<Car, BufferedImage> carImages = new HashMap<>();
-    HashMap<Car, Point> carPoints = new HashMap<Car, Point>();
-    BufferedImage volvoWorkshopImage;
-
-    // To keep track of a single car's position
-    Point volvoPoint = new Point();
-    Point saabPoint = new Point(0,200);
-    Point scaniaPoint = new Point(0, 400);
-    Point volvoWorkshopPoint = new Point(500,0);
-
-
     drawImage images = new drawImage();
-
-
-    // TODO: Make this general for all cars
-    void moveit(Car car, int x, int y) {
-        carPoints.put(car, new Point(x,y));
-    }
-    public void addCar(Car car) {
-        if (car.getModelname().equals("Volvo240")) {
-            carImages.put(car, images.volvo);
-            carPoints.put(car, volvoPoint);
-        } else if (car.getModelname().equals("Saab95")) {
-            carImages.put(car, images.saab);
-            carPoints.put(car, saabPoint);
-        } else if (car.getModelname().equals("Scania")) {
-            carImages.put(car, images.scania);
-            carPoints.put(car, scaniaPoint);
-        }
-
-        volvoWorkshopImage = images.verkstad;
-    }
+    Point volvoWorkshopPoint = new Point(images.volvoVerkstad.getPosition().x,0);
 
     // Initializes the panel and reads the images
     public DrawPanel(int x, int y) {
@@ -53,18 +22,19 @@ public class DrawPanel extends JPanel{
         this.setBackground(Color.cyan);
     }
 
-    // This method is called each time the panel updates/refreshes/repaints itself
-    // TODO: Change to suit your needs.
     @Override
     protected void paintComponent(Graphics g) {
 
         super.paintComponent(g);
-        for (Car car : carImages.keySet()) {
-            Point carPoint = carPoints.get(car);
-            BufferedImage carImage = carImages.get(car);
+        for (Car car : images.carImages.keySet()) {
+            Point carPoint = images.carPoints.get(car);
+            BufferedImage carImage = images.carImages.get(car);
             g.drawImage(carImage, carPoint.x, carPoint.y, null);
         }
 
-        g.drawImage(volvoWorkshopImage, volvoWorkshopPoint.x, volvoWorkshopPoint.y, null);
+        Point pos = images.volvoVerkstad.getPosition();
+        g.drawImage(images.verkstad, pos.x, pos.y, null);
+
+
     }
 }

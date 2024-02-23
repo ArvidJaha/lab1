@@ -29,9 +29,9 @@ public class BilTransport extends Car implements hasRamp{
     public void loadCar(Car car) {
         Point2D.Double transportCoordinates = new Point2D.Double(car.getxPos(), car.getyPos());
         if(!rampState && flaket.size() <= MAXLOAD
-                && car.getCordination().distance(transportCoordinates) <= 5.0) {
+                && car.getPosition().distance(transportCoordinates) <= 5.0) {
             flaket.push(car);
-            car.getCordination().setLocation(transportCoordinates);
+            car.getPosition().setLocation(transportCoordinates);
         }
         else throw new IllegalArgumentException("error");
     }
@@ -78,7 +78,7 @@ public class BilTransport extends Car implements hasRamp{
     public void updateBilTransport () {
         Point2D.Double transportCoordinates = new Point2D.Double(getxPos(), getyPos());
         for (Car c: this.getFlak()) {
-            c.getCordination().setLocation(transportCoordinates);
+            c.getPosition().setLocation(transportCoordinates);
         }
     }
     }

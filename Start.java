@@ -1,4 +1,5 @@
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -18,7 +19,7 @@ public class Start {
 
 
         // Start a new view and send a reference of self
-        st.frame = new CarView("CarSim 1.0", st.cc);
+        st.frame = GraphicsFactory.createCV("CarSim 1.0", st.cc);
 
         // Start the timer
         st.timer.start();
@@ -33,17 +34,15 @@ public class Start {
                 car.move();
                 int x = (int) Math.round(car.getxPos());
                 int y = (int) Math.round(car.getyPos());
-                frame.drawPanel.addCar(car);
-                frame.drawPanel.moveit(car, x, y);
+                frame.drawPanel.images.addCar(car);
+                frame.drawPanel.images.moveit(car, x, y);
                 System.out.println(car.getxPos());
                 if(car instanceof Scania) {
                     System.out.println(((Scania) car).getRamp().getAngle());
                 }
-               /* if(car instanceof Volvo240) {
-                    loadVolvo((Volvo240) car);
+                if(car instanceof Volvo240) {
+                    cc.loadVolvo((Volvo240) car, frame);
                 }
-
-                */
                 if (x > frame.drawPanel.getWidth() - 100) {
                     car.setDirection(3);
                 }

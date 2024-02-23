@@ -23,8 +23,8 @@ public class CarTest {
         sabcar = new Saab95();
         transport = new BilTransport();
         scania = new Scania();
-        verkstadMedVolvo = new Verkstad<>(2, new Point2D.Double(100, 100));
-        verkstadMedAllaCar = new Verkstad<>(2, new Point2D.Double(250, 300));
+        verkstadMedVolvo = new Verkstad<>(2, new Point(100, 100));
+        verkstadMedAllaCar = new Verkstad<>(2, new Point(250, 300));
     }
 
     @Test

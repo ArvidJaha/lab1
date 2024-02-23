@@ -1,5 +1,4 @@
 import java.awt.*;
-import java.awt.geom.Point2D;
 
 public abstract class Car implements Movable {
     private final int nrDoors; // Number of doors on the car
@@ -8,9 +7,9 @@ public abstract class Car implements Movable {
     private Color color; // Color of the car
     private final String modelName; // The car model name
     private int direction; //
-    private double xPos;
-    private double yPos;
-    protected Point2D.Double cordination = new Point2D.Double(xPos, yPos);
+    private int xPos;
+    private int yPos;
+    protected Point cordination = new Point(xPos, yPos);
 
     public Car(int nrDoors, double enginePower, Color color, String modelName) {
         this.nrDoors = nrDoors;
@@ -18,8 +17,8 @@ public abstract class Car implements Movable {
         this.color = color;
         this.modelName = modelName;
         this.direction = 1;
-        this.yPos = 0.0;
-        this.xPos = 0.0;
+        this.yPos = 0;
+        this.xPos = 0;
     }
 
     // Getters och setters
@@ -30,9 +29,9 @@ public abstract class Car implements Movable {
         return yPos;
     }
     public String getModelname(){return modelName;}
-    public void setxPos(double value){xPos = value;}
-    public void setyPos(double value){yPos = value;}
-    public Point2D.Double getCordination(){
+    public void setxPos(int value){xPos = value;}
+    public void setyPos(int value){yPos = value;}
+    public Point getPosition(){
         return cordination;
     }
     public int getNrDoors() {return nrDoors;}
