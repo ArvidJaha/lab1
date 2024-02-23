@@ -1,10 +1,10 @@
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 public class BunAction {
 
-    CarController carC;
     int gasAmount = 0;
     JButton gasButton = new JButton("Gas");
     JButton brakeButton = new JButton("Brake");
@@ -13,11 +13,13 @@ public class BunAction {
     JButton liftBedButton = new JButton("Scania Lift Bed");
     JButton lowerBedButton = new JButton("Lower Lift Bed");
 
-    JButton startButton = new JButton("Start all cars");
+    JButton startButton = new JButton( "Start all cars");
     JButton stopButton = new JButton("Stop all cars");
 
-    public BunAction(CarController carC){
-        this.carC = carC;
+    CarController carC;
+
+    public BunAction(CarController cc){
+        this.carC = cc;
         addActionListeners();
     }
 
