@@ -34,7 +34,5 @@ public class DrawPanel extends JPanel{
 
         Point pos = images.volvoVerkstad.getPosition();
         g.drawImage(images.verkstad, pos.x, pos.y, null);
-
-
     }
 }

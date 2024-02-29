@@ -11,7 +11,7 @@ public class drawImage extends JPanel {
     public final HashMap<Car, Point> carPoints = new HashMap<>();
 
     private BufferedImage volvo;
-    private BufferedImage saab;
+    private BufferedImage Saab95;
     private BufferedImage scania;
     public BufferedImage verkstad;
     public Verkstad<Volvo240> volvoVerkstad;
@@ -19,10 +19,10 @@ public class drawImage extends JPanel {
     public drawImage() {
         try {
             this.volvo = ImageIO.read(getClass().getResourceAsStream("pics/Volvo240.jpg"));
-            this.saab = ImageIO.read(getClass().getResourceAsStream("pics/Saab95.jpg"));
+            this.Saab95 = ImageIO.read(getClass().getResourceAsStream("pics/Saab95.jpg"));
             this.scania = ImageIO.read(getClass().getResourceAsStream("pics/Scania.jpg"));
             this.verkstad = ImageIO.read(getClass().getResourceAsStream("pics/VolvoBrand.jpg"));
-            this.volvoVerkstad = new Verkstad<Volvo240>(20, new Point(300,0));
+            this.volvoVerkstad = new Verkstad<Volvo240>(20, new Point(300,300));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -37,14 +37,12 @@ public class drawImage extends JPanel {
             carImages.put(car, volvo);
             carPoints.put(car, car.getPosition());
         } else if (car.getModelname().equals("Saab95")) {
-            carImages.put(car, saab);
+            carImages.put(car, Saab95);
             carPoints.put(car, car.getPosition());
         } else if (car.getModelname().equals("Scania")) {
             carImages.put(car, scania);
             carPoints.put(car, car.getPosition());
         }
-//        verkstadImages.put(volvoVerkstad, verkstad);
-//        verkstadPoints.put(volvoVerkstad, volvoVerkstad.getPosition());
     }
 }
 

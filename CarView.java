@@ -18,17 +18,15 @@ public class CarView extends JFrame{
     private static final int Y = 800;
 
     // The controller member
-    GraphicsFactory gF;
-    BunAction bunAc;
-    DrawPanel drawPanel = GraphicsFactory.createDP(X, Y-240);
-    JPanel controlPanel = new JPanel();
-    JPanel gasPanel = new JPanel();
-    JSpinner gasSpinner = new JSpinner();
-    JLabel gasLabel = new JLabel("Amount of gas");
+    private final BunAction bunAc;
+    public final DrawPanel drawPanel = GraphicsFactory.createDP(X, Y-240);
+    private final JPanel controlPanel = new JPanel();
+    private final JPanel gasPanel = new JPanel();
+    private JSpinner gasSpinner = new JSpinner();
+    private JLabel gasLabel = new JLabel("Amount of gas");
 
     // Constructor
     public CarView(String framename, CarController carC){
-        this.gF = new GraphicsFactory();
         this.bunAc = new BunAction(carC);
         initComponents(framename);
     }
@@ -69,23 +67,23 @@ public class CarView extends JFrame{
         controlPanel.add(bunAc.brakeButton, 3);
         controlPanel.add(bunAc.turboOffButton, 4);
         controlPanel.add(bunAc.lowerBedButton, 5);
+        controlPanel.add(bunAc.addCarButton, 6);
+        controlPanel.add(bunAc.removeCarButton, 7);
         controlPanel.setPreferredSize(new Dimension((X/2)+4, 200));
+        controlPanel.setBackground(Color.WHITE);
         this.add(controlPanel);
-        controlPanel.setBackground(Color.CYAN);
 
-
+        bunAc.addCarButton.setBackground(Color.YELLOW);
+        bunAc.removeCarButton.setBackground(Color.RED);
         bunAc.startButton.setBackground(Color.blue);
-        bunAc.startButton.setForeground(Color.green);
+        bunAc.startButton.setForeground(Color.white);
         bunAc.startButton.setPreferredSize(new Dimension(X/5-15,200));
         this.add(bunAc.startButton);
-
 
         bunAc.stopButton.setBackground(Color.red);
         bunAc.stopButton.setForeground(Color.black);
         bunAc.stopButton.setPreferredSize(new Dimension(X/5-15,200));
         this.add(bunAc.stopButton);
-        // This actionListener is for the gas button only
-        // TODO: Create more for each component as necessary
 
         // Make the frame pack all it's components by respecting the sizes if possible.
         this.pack();

@@ -13,13 +13,13 @@ public class Start {
 
     public static void main(String[] args) {
         Start st = new Start();
-        st.cc.cars.add(CarFactory.createVolvo(0,0));
-        st.cc.cars.add(CarFactory.createScania(0,400));
-        st.cc.cars.add(CarFactory.createSaab(0, 200));
+//        st.cc.cars.add(CarFactory.createVolvo(0,0));
+//        st.cc.cars.add(CarFactory.createScania(0,400));
+//        st.cc.cars.add(CarFactory.createSaab(0, 200));
 
 
         // Start a new view and send a reference of self
-        st.frame = GraphicsFactory.createCV("CarSim 1.0", st.cc);
+        st.frame = GraphicsFactory.createCV("NYA Bilar filmen", st.cc);
 
         // Start the timer
         st.timer.start();
@@ -35,6 +35,7 @@ public class Start {
                 int x = (int) Math.round(car.getxPos());
                 int y = (int) Math.round(car.getyPos());
                 frame.drawPanel.images.addCar(car);
+//                frame.drawPanel.images.removeCar(car);
                 frame.drawPanel.images.moveit(car, x, y);
                 System.out.println(car.getxPos());
                 if(car instanceof Scania) {

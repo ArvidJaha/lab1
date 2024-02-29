@@ -231,7 +231,7 @@ public class CarTest {
 
         // Same tests with BilTransport
         transport.raiseRamp();
-        assertTrue(transport.getRamp().getRampState());
+        assertEquals(transport.getRamp().getRampState(), new RaisedState(transport));
     }
 
     @Test
@@ -253,7 +253,7 @@ public class CarTest {
 
         // Same tests with BilTransport
         transport.lowerRamp();
-        assertFalse(transport.getRamp().getRampState());
+        assertNotEquals(transport.getRamp().getRampState(), new LoweredState(transport));
     }
 
     @Test
@@ -361,8 +361,8 @@ public class CarTest {
 
     @Test
     public void getRampState() {
-        scania.getRamp().setRampState(true);
-        assertTrue(scania.getRamp().getRampState());
+        scania.getRamp().setRampState(new LoweredState(scania));
+        assertEquals(scania.getRamp().getRampState(), new LoweredState(scania));
     }
 
     @Test

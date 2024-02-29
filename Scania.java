@@ -1,21 +1,23 @@
 import java.awt.*;
 
 public class Scania extends Car implements hasRamp {
+    protected hasRamp flakstate;
     private final Ramp ramp;
 
     public Scania() {
         super(2, 90, Color.cyan, "Scania");
-        this.ramp = new Ramp();
-        this.ramp.setAngle(0);
+        this.flakstate = new LoweredState(this); // sätter så att flaket är nere från början.
+        this.ramp = new Ramp(this.flakstate);
     }
-
-
+    public void setFlakState (hasRamp flakState) {
+        this.flakstate = flakState;
+    }
     public void raiseRamp() {
-        ramp.raiseRamp(this.getCurrentSpeed());
+        ramp.raiseRamp(this.getCurrentSpeed(), flakstate);
     }
 
     public void lowerRamp() {
-        ramp.lowerRamp(this.getCurrentSpeed());
+        ramp.lowerRamp(this.getCurrentSpeed(), flakstate);
     }
 
     public Ramp getRamp() {
@@ -27,14 +29,12 @@ public class Scania extends Car implements hasRamp {
         if (this.ramp.getAngle() == 0 && bool(amount)) {
             incrementSpeed(amount);
             this.setCurrentSpeed(Math.min(this.getCurrentSpeed(), getEnginePower()));
-        } else  {
-            throw new IllegalArgumentException("cant gas");
-    }
+        }
     }
 
     private boolean bool(double amount) {
         return this.getCurrentSpeed() >= 0 && this.getCurrentSpeed() <=
-                getEnginePower() && (amount >= 0 && amount <= 1);
+                this.getEnginePower() && (amount >= 0 && amount <= 1);
     }
 
     private double speedFactor() {
@@ -58,5 +58,5 @@ public class Scania extends Car implements hasRamp {
             super.move();
         }
     }
-    }
+}
 
