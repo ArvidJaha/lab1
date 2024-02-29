@@ -3,13 +3,17 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class drawImage extends JPanel {
 
     public final HashMap<Car, BufferedImage> carImages = new HashMap<>();
     public final HashMap<Car, Point> carPoints = new HashMap<>();
 
+    private GraphicCars gf = new GraphicCars();
+    public final List<GraphicsObject> graphicCars = new ArrayList<>();
     private BufferedImage volvo;
     private BufferedImage Saab95;
     private BufferedImage scania;
@@ -22,26 +26,23 @@ public class drawImage extends JPanel {
             this.Saab95 = ImageIO.read(getClass().getResourceAsStream("pics/Saab95.jpg"));
             this.scania = ImageIO.read(getClass().getResourceAsStream("pics/Scania.jpg"));
             this.verkstad = ImageIO.read(getClass().getResourceAsStream("pics/VolvoBrand.jpg"));
-            this.volvoVerkstad = new Verkstad<Volvo240>(20, new Point(300,300));
+            this.volvoVerkstad = new Verkstad<Volvo240>(20, new Point(500,0));
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    void moveit(Car car, int x, int y) {
-        carPoints.put(car, new Point(x,y));
+    void moveit(GraphicsObject o, int x, int y) {
+        o.modelCar.cordination = new Point(x,y);
     }
 
     public void addCar(Car car) {
         if (car.getModelname().equals("Volvo240")) {
-            carImages.put(car, volvo);
-            carPoints.put(car, car.getPosition());
+            graphicCars.add(gf.graphicsVolvo());
         } else if (car.getModelname().equals("Saab95")) {
-            carImages.put(car, Saab95);
-            carPoints.put(car, car.getPosition());
+            graphicCars.add(gf.graphicsSaab());
         } else if (car.getModelname().equals("Scania")) {
-            carImages.put(car, scania);
-            carPoints.put(car, car.getPosition());
+           graphicCars.add(gf.graphicsScania());
         }
     }
 }

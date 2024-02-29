@@ -13,7 +13,7 @@ public class Start {
 
     public static void main(String[] args) {
         Start st = new Start();
-//        st.cc.cars.add(CarFactory.createVolvo(0,0));
+        st.cc.cars.add(CarFactory.createVolvo(5,7));
 //        st.cc.cars.add(CarFactory.createScania(0,400));
 //        st.cc.cars.add(CarFactory.createSaab(0, 200));
 
@@ -36,7 +36,7 @@ public class Start {
                 int y = (int) Math.round(car.getyPos());
                 frame.drawPanel.images.addCar(car);
 //                frame.drawPanel.images.removeCar(car);
-                frame.drawPanel.images.moveit(car, x, y);
+                frame.drawPanel.images.moveit(, x, y);
                 System.out.println(car.getxPos());
                 if(car instanceof Scania) {
                     System.out.println(((Scania) car).getRamp().getAngle());
