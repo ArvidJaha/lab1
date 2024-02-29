@@ -8,13 +8,14 @@ public class CarController implements SubjectObserver{
 
     ArrayList<Car> cars = new ArrayList<>();
     ArrayList<CarObserver> observers = new ArrayList<>();
+    ArrayList<GraphicsObject> graphicCars = new ArrayList<>();
     // The delay (ms) corresponds to 20 updates a sec (hz
 
     // Calls the gas method for each car once
     void gas(int amounts) {
         double gas = ((double) amounts) / 100;
-        for (Car car : cars) {
-            car.gas(gas);
+        for (GraphicsObject o  : graphicCars) {
+            o.modelCar.gas(gas);
         }
     }
 

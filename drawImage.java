@@ -14,7 +14,7 @@ public class drawImage extends JPanel {
 
     private GraphicCars gf = new GraphicCars();
     public final List<GraphicsObject> graphicCars = new ArrayList<>();
-    private BufferedImage volvo;
+    public BufferedImage volvo;
     private BufferedImage Saab95;
     private BufferedImage scania;
     public BufferedImage verkstad;

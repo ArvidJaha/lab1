@@ -8,12 +8,13 @@ public class Start {
     CarView frame;
     private final int delay = 50;
     private Timer timer = new Timer(delay, new TimerListener());
+   private static GraphicCars gf = new GraphicCars();
 
     CarController cc = GraphicsFactory.createCC();
 
     public static void main(String[] args) {
         Start st = new Start();
-        st.cc.cars.add(CarFactory.createVolvo(5,7));
+        st.cc.graphicCars.add(gf.graphicsVolvo());
 //        st.cc.cars.add(CarFactory.createScania(0,400));
 //        st.cc.cars.add(CarFactory.createSaab(0, 200));
 
@@ -30,25 +31,25 @@ public class Start {
      * */
     private class TimerListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-            for (Car car : cc.cars) {
-                car.move();
-                int x = (int) Math.round(car.getxPos());
-                int y = (int) Math.round(car.getyPos());
-                frame.drawPanel.images.addCar(car);
+            for (GraphicsObject o : cc.graphicCars) {
+                o.modelCar.move();
+                int x = (int) Math.round(o.modelCar.getxPos());
+                int y = (int) Math.round(o.modelCar.getyPos());
+                frame.drawPanel.images.addCar(o.modelCar);
 //                frame.drawPanel.images.removeCar(car);
-                frame.drawPanel.images.moveit(, x, y);
-                System.out.println(car.getxPos());
-                if(car instanceof Scania) {
-                    System.out.println(((Scania) car).getRamp().getAngle());
+              //  frame.drawPanel.images.moveit(car , x, y);
+                System.out.println(o.modelCar.getxPos());
+                if(o.modelCar instanceof Scania) {
+                    System.out.println(((Scania) o.modelCar).getRamp().getAngle());
                 }
-                if(car instanceof Volvo240) {
-                    cc.loadVolvo((Volvo240) car, frame);
+                if(o.modelCar instanceof Volvo240) {
+                    cc.loadVolvo((Volvo240) o.modelCar, frame);
                 }
                 if (x > frame.drawPanel.getWidth() - 100) {
-                    car.setDirection(3);
+                    o.modelCar.setDirection(3);
                 }
                 if (x < 0) {
-                    car.setDirection(1);
+                    o.modelCar.setDirection(1);
                 } else
                     // repaint() calls the paintComponent method of the panel
                     frame.drawPanel.repaint();
