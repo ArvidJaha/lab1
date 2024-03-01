@@ -14,7 +14,7 @@ public class Start {
 
     public static void main(String[] args) {
         Start st = new Start();
-        st.cc.graphicCars.add(gf.graphicsVolvo());
+   //     st.cc.graphicCars.add(gf.graphicsVolvo());
 //        st.cc.cars.add(CarFactory.createScania(0,400));
 //        st.cc.cars.add(CarFactory.createSaab(0, 200));
 
@@ -37,7 +37,7 @@ public class Start {
                 int y = (int) Math.round(o.modelCar.getyPos());
                 frame.drawPanel.images.addCar(o.modelCar);
 //                frame.drawPanel.images.removeCar(car);
-              //  frame.drawPanel.images.moveit(car , x, y);
+                frame.drawPanel.images.moveit(o, x, y);
                 System.out.println(o.modelCar.getxPos());
                 if(o.modelCar instanceof Scania) {
                     System.out.println(((Scania) o.modelCar).getRamp().getAngle());
@@ -50,7 +50,8 @@ public class Start {
                 }
                 if (x < 0) {
                     o.modelCar.setDirection(1);
-                } else
+                }
+                else
                     // repaint() calls the paintComponent method of the panel
                     frame.drawPanel.repaint();
             }

@@ -26,10 +26,10 @@ public class DrawPanel extends JPanel{
     protected void paintComponent(Graphics g) {
 
         super.paintComponent(g);
-        for (GraphicsObject o : images.graphicCars) {
+        for (GraphicsObject o : images.cc.graphicCars) {
           //  Point carPoint = images.carPoints.get(car);
            // BufferedImage carImage = images.carImages.get(car);
-            g.drawImage(o.image, (int) o.getx(), (int) o.gety(), null);
+            g.drawImage(o.image, (int) o.modelCar.getxPos(), (int) o.modelCar.getyPos(), null);
         }
 
         Point pos = images.volvoVerkstad.getPosition();

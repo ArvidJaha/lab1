@@ -1,24 +1,32 @@
 import javax.imageio.ImageIO;
+import java.util.Random;
 
 public class GraphicCars {
 
-    public GraphicsObject graphicsScania() {
+    private static int getRandomY() {
+        Random rand = new Random();
+        return rand.nextInt(500);
+    }
+
+
+
+    public static GraphicsObject graphicsScania() {
         try {
-            return new GraphicsObject(ImageIO.read(getClass().getResourceAsStream("pics/Scania.jpg")), CarFactory.createScania(0, 300));
+            return new GraphicsObject(ImageIO.read(GraphicCars.class.getResourceAsStream("pics/Scania.jpg")), CarFactory.createScania(0, 200));
         } catch (Exception e) {
             return null;
         }
     }
-    public GraphicsObject graphicsVolvo() {
+    public static GraphicsObject graphicsVolvo() {
         try {
-            return new GraphicsObject(ImageIO.read(getClass().getResourceAsStream("pics/Volvo240.jpg")), CarFactory.createVolvo(0, 0));
+            return new GraphicsObject(ImageIO.read(GraphicCars.class.getResourceAsStream("pics/Volvo240.jpg")), CarFactory.createVolvo(0, 0));
         } catch (Exception e) {
             return null;
         }
     }
-    public GraphicsObject graphicsSaab() {
+    public static GraphicsObject graphicsSaab() {
         try {
-            return new GraphicsObject(ImageIO.read(getClass().getResourceAsStream("pics/Saab95.jpg")), CarFactory.createSaab(0, 150));
+            return new GraphicsObject(ImageIO.read(GraphicCars.class.getResourceAsStream("pics/Saab95.jpg")), CarFactory.createSaab(0, 400));
         } catch (Exception e) {
             return null;
         }
