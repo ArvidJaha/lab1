@@ -22,10 +22,10 @@ public abstract class Car implements Movable {
     }
 
     // Getters och setters
-    public double getxPos() {
+    public int getxPos() {
         return xPos;
     }
-    public double getyPos() {
+    public int getyPos() {
         return yPos;
     }
     public String getModelname(){return modelName;}

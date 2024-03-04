@@ -1,100 +1,99 @@
+import java.awt.geom.Point2D;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-import java.util.Set;
 
 public class CarController implements SubjectObserver{
     // member fields:
 
-    ArrayList<CarObserver> observers = new ArrayList<>();
-    ArrayList<GraphicsObject> graphicCars = new ArrayList<>();
+    private ArrayList<CarObserver> observers = new ArrayList<>();
+    public ArrayList<Car> cars = new ArrayList<>();
+
     // The delay (ms) corresponds to 20 updates a sec (hz
 
     // Calls the gas method for each car once
 
-
-
-    void gas(int amounts) {
+   public void gas(int amounts) {
         double gas = ((double) amounts) / 100;
-        for (GraphicsObject o  : graphicCars) {
-            o.modelCar.gas(gas);
+        for (Car o  : cars) {
+            o.gas(gas);
         }
     }
 
-    void brake(int amount) {
+    public void brake(int amount) {
         double brake = ((double) amount) / 100;
-        for (GraphicsObject o : graphicCars) {
-            o.modelCar.brake(brake);
+        for (Car o : cars) {
+            o.brake(brake);
         }
     }
 
-    void turboOn() {
-        for (GraphicsObject o : graphicCars) {
-            if (o.modelCar instanceof Saab95) {
-                ((Saab95) o.modelCar).setTurboOn();
+    public void turboOn() {
+        for (Car o : cars) {
+            if (o instanceof Saab95) {
+                ((Saab95) o).setTurboOn();
             }
         }
     }
 
-    void turboOff() {
-        for (GraphicsObject  o: graphicCars) {
-            if (o.modelCar instanceof Saab95) {
-                ((Saab95) o.modelCar).setTurboOff();
+    public void turboOff() {
+        for (Car  o: cars) {
+            if (o instanceof Saab95) {
+                ((Saab95) o).setTurboOff();
             }
         }
     }
 
-    void raiseFlak() {
-        for(GraphicsObject o : graphicCars) {
-            if (o.modelCar instanceof Scania) {
-                ((Scania) o.modelCar).flakstate.raiseRamp();
+    public void raiseFlak() {
+        for(Car o : cars) {
+            if (o instanceof Scania) {
+                ((Scania) o).raiseRamp();
             }
         }
     }
-    void lowerFlak() {
-        for(GraphicsObject o : graphicCars) {
-            if (o.modelCar instanceof Scania) {
-                ((Scania) o.modelCar).flakstate.lowerRamp();
+    public void lowerFlak() {
+        for(Car o : cars) {
+            if (o instanceof Scania) {
+                ((Scania) o).lowerRamp();
             }
         }
     }
 
-    void stopAllCars() {
-        for (GraphicsObject o : graphicCars) {
-            o.modelCar.stopEngine();
+    public void stopAllCars() {
+        for (Car o : cars) {
+            o.stopEngine();
         }
     }
-    void startAllCars() {
-        for(GraphicsObject o : graphicCars) {
-            o.modelCar.startEngine();
+    public void startAllCars() {
+        for(Car o : cars) {
+            o.startEngine();
         }
     }
 
 
-
-
-    void loadVolvo(Volvo240 car, CarView frame) {
+    public void loadVolvo(Volvo240 car, CarView frame) {
         Verkstad<Volvo240> verkstad = new Verkstad<>(5, frame.drawPanel.volvoWorkshopPoint);
-        if(car.getPosition().x >= frame.drawPanel.volvoWorkshopPoint.x && car.getPosition().y > frame.drawPanel.volvoWorkshopPoint.y- 10) {
+        System.out.println(car.getxPos());
+        if(car.getxPos() > frame.drawPanel.volvoWorkshopPoint.x) {
             verkstad.add(car);
             car.setxPos(frame.drawPanel.volvoWorkshopPoint.x);
             car.setyPos(frame.drawPanel.volvoWorkshopPoint.y);
         }
     }
 
-    void addRandomCar() throws IOException {
-        if(graphicCars.size() < 10) {
-            RandomCar randomCar = new RandomCar();
-            graphicCars.add(randomCar.createCar());
-            notifyObserver();
+   public void addRandomCar() throws IOException {
+        RandomCar randomCar = new RandomCar();
+        if (cars.size() < 10) {
+            Car addedCar = randomCar.createCar();
+            cars.add(addedCar);
+            addedCar.startEngine();
+            notifyObserver(addedCar, false);
         }
     }
 
-    void removeLatestCar() {
+
+    public void removeLatestCar() {
         try {
-            graphicCars.removeLast();
-            notifyObserver();
+            Car removedCar = cars.removeLast();
+            notifyObserver(removedCar, true);
         } catch (Exception e){
            throw new IllegalArgumentException ("Carlist is empty");
         }
@@ -111,9 +110,9 @@ public class CarController implements SubjectObserver{
     }
 
     @Override
-    public void notifyObserver() {
+    public void notifyObserver(Car car, boolean isRemovingCar) {
         for (CarObserver o : observers) {
-            o.update(graphicCars.getLast().modelCar);
+            o.update(car, isRemovingCar);
         }
     }
 }

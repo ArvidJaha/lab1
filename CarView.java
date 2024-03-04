@@ -18,16 +18,17 @@ public class CarView extends JFrame{
     private static final int Y = 800;
 
     // The controller member
-    private final BunAction bunAc;
-    public final DrawPanel drawPanel = GraphicsFactory.createDP(X, Y-240);
-    private final JPanel controlPanel = new JPanel();
-    private final JPanel gasPanel = new JPanel();
+    private BunAction bunAc;
+    public DrawPanel drawPanel;
+    private JPanel controlPanel = new JPanel();
+    private JPanel gasPanel = new JPanel();
     private JSpinner gasSpinner = new JSpinner();
     private JLabel gasLabel = new JLabel("Amount of gas");
 
     // Constructor
     public CarView(String framename, CarController carC){
         this.bunAc = new BunAction(carC);
+        this.drawPanel = GraphicsFactory.createDP(X, Y-240);
         initComponents(framename);
     }
 

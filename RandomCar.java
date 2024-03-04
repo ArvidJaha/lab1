@@ -3,17 +3,17 @@ import java.util.ArrayList;
 import java.util.Random;
 public class RandomCar {
     private final Random generator = new Random();
-    private ArrayList<GraphicsObject> graphicsObjects = new ArrayList<>();
+    private ArrayList<Car> cars = new ArrayList<>();
     private int i;
     public RandomCar() {
-        this.graphicsObjects.add(GraphicCars.graphicsVolvo());
-        this.graphicsObjects.add(GraphicCars.graphicsSaab());
-        this.graphicsObjects.add(GraphicCars.graphicsScania());
-        this.i = generator.nextInt(graphicsObjects.size());
+        this.cars.add(CarFactory.createVolvo(0,0));
+        this.cars.add(CarFactory.createSaab(0,200));
+        this.cars.add(CarFactory.createScania(0,400));
+        this.i = generator.nextInt(cars.size());
     }
 
-    public GraphicsObject createCar () {
-        return graphicsObjects.get(i);
+    public Car createCar () {
+        return cars.get(i);
     }
 }
 
